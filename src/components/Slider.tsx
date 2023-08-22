@@ -15,8 +15,13 @@ export default function Slider() {
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isDragging) return;
 
+    //? getBoundingClientRect(): Element의 크기와 뷰포트에 대한 상대적인 위치를 반환
     const rect = e.currentTarget.getBoundingClientRect();
+
+    // 0 ~ rect.width 사이의 값으로 x를 제한
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+
+    // 0 ~ 100 사이의 값으로 percent를 제한
     const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
 
     setSliderPosition(percent);
@@ -50,7 +55,7 @@ export default function Slider() {
             left: `calc(${sliderPosition}% - 1px)`,
           }}
         >
-          <div className="bg-white absolute rounded-full h-3 w-3 -left-1 top-[calc(50%-5px)]" />
+          <div className="bg-violet-500/50 absolute rounded-full h-6 w-6 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 " />
         </div>
       </div>
     </div>
